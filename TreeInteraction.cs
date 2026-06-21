@@ -19,7 +19,7 @@ public class TreeInteraction : MonoBehaviour
             if (stockUIManager.Instance != null)
             {
                 stockUIManager.Instance.ToggleTooltip(myData); //Pass the stock data to the UI Manager
-                Debug.Log("Clicked on: " + myData.ticker); // Tracebaks
+                Debug.Log("Clicked on: " + myData.ticker); // Tracebacks
             }
             else
             {
