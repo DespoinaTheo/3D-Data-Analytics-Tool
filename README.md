@@ -12,6 +12,9 @@ The framework utilizes a tree metaphor for stock market data visualization, comb
 - Mini Map
 - Data Chart
 
+### Second Version: VR/ Immersive Version
+In active development
+
 ## Tech Stack
 - **Engine**: Unity
 - **Language**: C#, Python
