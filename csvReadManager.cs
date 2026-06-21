@@ -3,20 +3,21 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This class reads the CSV file and filters the data by month and year.
 public class CSVReaderManager : MonoBehaviour
 {
     [Header("File Settings")]
-    [Tooltip("Σύρετε και αφήστε (Drag & Drop) το αρχείο CSV εδώ από το Project window.")]
     public TextAsset csvFile; 
 
-    // Λίστα που χρησιμοποιεί απευθείας το δικό σου StockData
+    // List that stores all the parsed stock data rows
     private List<StockData> allStocksData = new List<StockData>();
 
     void Awake()
     {
-        LoadCSV();
+        LoadCSV(); // Load and parse the CSV file when the app starts
     }
 
+    // Reads the CSV text from memory and converts rows into StockData objects
     void LoadCSV()
     {
         if (csvFile == null)
@@ -29,18 +30,18 @@ public class CSVReaderManager : MonoBehaviour
         using (StringReader reader = new StringReader(csvFile.text))
         {
             bool isHeader = true;
-            while (reader.Peek() != -1)
+            while (reader.Peek() != -1) 
             {
                 string line = reader.ReadLine();
-                if (isHeader) { isHeader = false; continue; }
+                if (isHeader) { isHeader = false; continue; } // Skip the first row (header with column names)
 
-                string[] values = line.Split(',');
-                if (values.Length < 11) continue;
+                string[] values = line.Split(','); // Split the line into values using commas
+                if (values.Length < 11) continue; // Skip broken or incomplete rows
 
                 try
                 {
                     StockData data = new StockData();
-                    
+                    // Parse, clean strings, and map properties
                     data.date = values[0].Trim();
                     data.ticker = values[1].Trim();
                     data.sector = values[2].Trim();
@@ -64,19 +65,21 @@ public class CSVReaderManager : MonoBehaviour
         Debug.Log("CSV loaded successfully via Inspector. Total rows: " + allStocksData.Count);
     }
 
-    // Η συνάρτηση που φιλτράρει και επιστρέφει τη λίστα StockData χωρίς σφάλματα μετατροπής
+    // Filters the main list and returns only the rows that match the selected month and year.
     public List<StockData> FilterDataByMonth(int month, int year)
     {
         List<StockData> filtered = new List<StockData>();
 
         foreach (var row in allStocksData)
         {
+            // Split date string (Expected format: YYYY-MM-DD)
             string[] dateParts = row.date.Split('-');
             if (dateParts.Length >= 2)
             {
                 int rowYear = int.Parse(dateParts[0]);
                 int rowMonth = int.Parse(dateParts[1]);
 
+                // If the row matches the timeline slider, add it to the filtered list
                 if (rowMonth == month && rowYear == year)
                 {
                     filtered.Add(row);
