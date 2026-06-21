@@ -21,4 +21,4 @@ In active development
 
 ## Access Limitation
 Due to academic ethics and the fact that my master’s thesis research is currently ongoing, I am unable to publish the complete repository of the project at this stage. However, to demonstrate my technical approach and coding standards, I have shared a curated selection of core scripts from the project's codebase below.
-3D Version of the App is completed and can be made available for review upon professional request and with my supervisor's agrement.
+3D Version of the App is completed and can be made available for review upon professional request and with my supervisor's agreement.
